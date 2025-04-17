@@ -226,6 +226,7 @@ func (m *Model) View() string {
 	for _, child := range m.clusters {
 		treeviewHeight += child.Len()
 	}
+	treeviewHeight = min(treeviewHeight, m.height/4)
 
 	var content string
 	if m.list == nil {

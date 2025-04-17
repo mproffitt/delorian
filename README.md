@@ -13,6 +13,13 @@ currently no args to the program so don't worry about that (for now).
 `delorian` will try and discover details about flux kustomizations, detect
 clusters and render manifests.
 
+## Install
+
+```bash
+go build . &&
+install -m 755 delorian ~/bin/delorian
+```
+
 ## Usage
 
 Select a flux kustomization in the left menu. Hit `<TAB>` to switch between
