@@ -240,7 +240,7 @@ func (m *Model) print(entries []DiffEntry) string {
 	log.Debug("printing entries", "filters", filters)
 	for _, entry := range entries {
 		if !slices.Contains(filters, entry.Kind) {
-			content = append(content, entry.WithFilter(filters...).View())
+			content = append(content, entry.WithFilter(filters...).View(m.width))
 		}
 	}
 	return lipgloss.JoinVertical(lipgloss.Left, content...)

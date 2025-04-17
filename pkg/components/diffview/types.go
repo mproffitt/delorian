@@ -102,12 +102,12 @@ func (d DiffEntry) WithState(s DrawerState) DiffEntry {
 	return d
 }
 
-func (d DiffEntry) View() string {
+func (d DiffEntry) View(width int) string {
 	d.state = EntryOpenIndicator
 	changes := make([]string, 0)
 	for _, change := range d.Changes {
 		if !slices.Contains(d.filter, change.Key) {
-			changes = append(changes, change.View())
+			changes = append(changes, change.View(width))
 		}
 	}
 	if len(changes) == 0 {
@@ -133,7 +133,7 @@ type DiffChange struct {
 	Changes []ChangeSet
 }
 
-func (d DiffChange) View() string {
+func (d DiffChange) View(width int) string {
 	key := lipgloss.NewStyle().
 		PaddingLeft(2).
 		Foreground(theme.Colours.BrightBlue).
@@ -144,7 +144,7 @@ func (d DiffChange) View() string {
 		Render(d.Title)
 	changes := make([]string, 0)
 	for _, change := range d.Changes {
-		changes = append(changes, change.View())
+		changes = append(changes, change.View(width))
 	}
 	return lipgloss.JoinVertical(
 		lipgloss.Left,
@@ -157,16 +157,18 @@ type ChangeSet struct {
 	Deletion []string
 }
 
-func (c ChangeSet) View() string {
+func (c ChangeSet) View(width int) string {
+	padding := 6
+	width -= padding
 	additionLines := make([]string, 0)
 	for _, line := range c.Addition {
 		if line == "" {
 			continue
 		}
-		line = wrap.String(line, 60)
+		line = wrap.String(line, width)
 		additionLines = append(additionLines, lipgloss.NewStyle().
 			Foreground(theme.Colours.Green).
-			PaddingLeft(6).
+			PaddingLeft(padding).
 			Render(line))
 	}
 
@@ -175,10 +177,10 @@ func (c ChangeSet) View() string {
 		if line == "" {
 			continue
 		}
-		line = wrap.String(line, 60)
+		line = wrap.String(line, width)
 		deletionLines = append(deletionLines, lipgloss.NewStyle().
 			Foreground(theme.Colours.Red).
-			PaddingLeft(6).
+			PaddingLeft(padding).
 			Render(line))
 	}
 
