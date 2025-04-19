@@ -19,7 +19,10 @@
 
 package theme
 
-import "github.com/charmbracelet/lipgloss"
+import (
+	"github.com/charmbracelet/lipgloss"
+	bmx "github.com/mproffitt/bmx/pkg/theme"
+)
 
 var Colours ColourStyles
 
@@ -69,4 +72,5 @@ func init() {
 		White:        lipgloss.AdaptiveColor{Dark: "#c0caf5", Light: "#343b58"}, // Terminal white
 		Yellow:       lipgloss.AdaptiveColor{Dark: "#e0af68", Light: "#8f5e15"}, // Terminal Yellow
 	}
+	bmx.Colours = bmx.ColourStyles(Colours)
 }

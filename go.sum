@@ -138,8 +138,8 @@ github.com/mitchellh/hashstructure/v2 v2.0.2 h1:vGKWl0YJqUNxE8d+h8f6NJLcCJrgbhC4
 github.com/mitchellh/hashstructure/v2 v2.0.2/go.mod h1:MG3aRVU/N29oo/V/IhBX8GR/zz4kQkprJgF2EVszyDE=
 github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00 h1:n6/2gBQ3RWajuToeY6ZtZTIKv2v7ThUy5KKusIT0yc0=
 github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00/go.mod h1:Pm3mSP3c5uWn86xMLZ5Sa7JB9GsEZySvHYXCTK4E9q4=
-github.com/mproffitt/bmx v0.0.0-20250417065643-6e541941695f h1:xGLp+GHALAvojSYm0Cht46NbtyNbJ2DrPRTVboFhgRo=
-github.com/mproffitt/bmx v0.0.0-20250417065643-6e541941695f/go.mod h1:XEVb5i8+/suFJN+grYF+NpsL8MbM/Tf+Olr9PTlTfqA=
+github.com/mproffitt/bmx v0.0.0-20250419084107-98b49ebd22b0 h1:k65dvgLCHWasqrdFJpz3kk/20TQs0OHAMSE5zVU4OmY=
+github.com/mproffitt/bmx v0.0.0-20250419084107-98b49ebd22b0/go.mod h1:XEVb5i8+/suFJN+grYF+NpsL8MbM/Tf+Olr9PTlTfqA=
 github.com/mproffitt/bubbles v0.21.1 h1:wKyfWEDxwWHQYh2JaH16Q7i/GTvJBdLUvDeyxCw3fqU=
 github.com/mproffitt/bubbles v0.21.1/go.mod h1:HF+v6QUR4HkEpz62dx7ym2xc71/KBHg+zKwJtMw+qtg=
 github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 h1:ZK8zHtRHOkbHy6Mmr5D264iyp3TiX5OmNcI5cIARiQI=

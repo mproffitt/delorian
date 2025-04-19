@@ -31,7 +31,6 @@ import (
 	zone "github.com/lrstanley/bubblezone"
 	"github.com/mproffitt/bmx/pkg/components/overlay"
 	"github.com/mproffitt/bmx/pkg/components/toast"
-	"github.com/mproffitt/bmx/pkg/config"
 	"github.com/mproffitt/delorian/pkg/components"
 	"github.com/mproffitt/delorian/pkg/components/tabview"
 	"github.com/mproffitt/delorian/pkg/components/yamlview"
@@ -98,9 +97,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.layout.primary, _ = m.layout.primary.Update(msg)
 		cmd = toast.NewToastCmd(toast.Error, msg.Error.Error())
 	case components.ModelFatalMsg:
-		m.layout.fatal = toast.New(toast.Error, msg.Error.Error(),
-			config.ColourStyles(theme.Colours),
-		).SetTickDuration(45 * time.Millisecond).SetCompletionCommand(tea.Quit)
+		m.layout.fatal = toast.New(toast.Error, msg.Error.Error()).
+			SetTickDuration(45 * time.Millisecond).
+			SetCompletionCommand(tea.Quit)
 		cmd = m.layout.fatal.Init()
 	case tea.WindowSizeMsg:
 		cmd = m.resize(msg)
@@ -110,16 +109,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		// a warning if we recieve more toast messages than we have
 		// capacity for
 		if len(m.layout.toasts) < MaxToasts-1 {
-			toast := toast.New(msg.Type, msg.Message,
-				config.ColourStyles(theme.Colours)).SetTickDuration(25 * time.Millisecond)
+			toast := toast.New(msg.Type, msg.Message).
+				SetTickDuration(25 * time.Millisecond)
 			cmd = toast.Init()
 			m.layout.toasts = append(m.layout.toasts, toast)
 			break
 		} else if len(m.layout.toasts) < cap(m.layout.toasts) {
 			toast := toast.New(
 				toast.Warning,
-				"Too many messages to display\nSee log for details",
-				config.ColourStyles(theme.Colours))
+				"Too many messages to display\nSee log for details")
 			cmd = toast.Init()
 			m.layout.toasts = append(m.layout.toasts, toast)
 		}

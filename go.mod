@@ -14,7 +14,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/lrstanley/bubblezone v0.0.0-20250404061050-e13639e27357
 	github.com/mikefarah/yq/v4 v4.45.1
-	github.com/mproffitt/bmx v0.0.0-20250417065643-6e541941695f
+	github.com/mproffitt/bmx v0.0.0-20250419084107-98b49ebd22b0
 	github.com/muesli/reflow v0.3.0
 	github.com/spf13/cobra v1.9.1
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394

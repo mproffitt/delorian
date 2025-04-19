@@ -26,7 +26,6 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/log"
-	"github.com/mproffitt/bmx/pkg/config"
 	"github.com/mproffitt/bmx/pkg/exec"
 	"github.com/mproffitt/delorian/pkg/components"
 	"github.com/mproffitt/delorian/pkg/components/filter"
@@ -185,7 +184,7 @@ func (m *Model) View() string {
 		msg := m.error.Error()
 		switch e := m.error.(type) {
 		case *exec.BmxExecError:
-			msg = e.StyledError(m.width, config.ColourStyles(theme.Colours))
+			msg = e.StyledError(m.width)
 		}
 		msg = lipgloss.NewStyle().
 			Foreground(theme.Colours.Red).
