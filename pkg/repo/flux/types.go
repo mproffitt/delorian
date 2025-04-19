@@ -23,6 +23,7 @@ import (
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/mproffitt/delorian/pkg/kustomize"
 )
 
 type FluxFileType uint
@@ -144,7 +145,7 @@ func readFile(filename string, filterOpts ...string) string {
 	if len(filterOpts) == 0 {
 		return string(content)
 	}
-	nc, err := filterKustomization(content, filterOpts...)
+	nc, err := kustomize.FilterKustomization(content, filterOpts...)
 	if err != nil {
 		return err.Error()
 	}

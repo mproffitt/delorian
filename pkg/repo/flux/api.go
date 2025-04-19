@@ -27,6 +27,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	zone "github.com/lrstanley/bubblezone"
 	"github.com/mproffitt/delorian/pkg/components"
+	"github.com/mproffitt/delorian/pkg/kustomize"
 )
 
 func (s *shortApi) Build() tea.Cmd {
@@ -41,12 +42,6 @@ func (s *shortApi) Build() tea.Cmd {
 }
 
 func (s *shortApi) Diff() tea.Cmd {
-	/*
-	   diff kustomization gazelle-clusters-operations -n default
-	     --kustomization-file management-clusters/gazelle/organizations/giantswarm-production/workload-clusters/operations.yaml
-	     --path management-clusters/gazelle/organizations/giantswarm-production/workload-clusters/operations
-	     --strict-substitute --progress-bar=false
-	*/
 	args := []string{
 		"diff", "kustomization", s.GetName(),
 		"-n", s.GetNamespace(),
@@ -88,11 +83,11 @@ func (s *shortApi) GetContent() string {
 	if s.ftype == Base {
 		return ""
 	}
-	content, err := execKustomize(filepath.Dir(s.kustomize))
+	content, err := kustomize.ExecKustomize(filepath.Dir(s.kustomize))
 	if err != nil {
 		return err.Error()
 	}
-	content, err = filterKustomization(content, options...)
+	content, err = kustomize.FilterKustomization(content, options...)
 	if err != nil {
 		return err.Error()
 	}

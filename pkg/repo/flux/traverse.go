@@ -45,12 +45,12 @@ import (
 	"github.com/charmbracelet/log"
 	"github.com/google/uuid"
 	"github.com/mproffitt/delorian/pkg/components"
+	"github.com/mproffitt/delorian/pkg/kustomize"
 	"golang.org/x/exp/slices"
 	yaml "gopkg.in/yaml.v3"
 )
 
 const (
-	kustomization    = "kustomization"
 	kustomizationApi = "kustomize.toolkit.fluxcd.io"
 	sourceApi        = "source.toolkit.fluxcd.io"
 )
@@ -133,7 +133,7 @@ func (m *Model) followFluxKustomization(index int, fluxKust *shortApi) error {
 	if !strings.HasPrefix(path, m.root) {
 		path = filepath.Join(m.root, path)
 	}
-	fp, kust := getKustomization(path)
+	fp, kust := kustomize.GetKustomization(path)
 	fluxKust.kustomize = fp
 	if kust == nil || slices.Contains(kust.Resources, filepath.Base(path)) {
 		fluxKust.ftype = Complete
@@ -153,7 +153,7 @@ func (m *Model) followFluxKustomization(index int, fluxKust *shortApi) error {
 		// parse directory with kustomization
 		filename := d.Name()
 		filename = filename[0 : len(filename)-len(filepath.Ext(filename))]
-		if filename == kustomization {
+		if filename == kustomize.Kustomization {
 			m.followKustomization(index, path, fluxKust)
 			return nil
 		}

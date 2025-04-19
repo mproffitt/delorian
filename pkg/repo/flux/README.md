@@ -23,8 +23,6 @@ boundaries
 
 This is kind of a big package and technically needs splitting into sub-modules
 
-- Kustomize to read / manage kustomization.yaml files. This will add additional
-  flexibility for future changes
 - Sidebar Models
   - Kustomization list
   - Git Source list (this doesn't yet exist)

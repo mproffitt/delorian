@@ -48,6 +48,14 @@ type Model struct {
 	error      error
 }
 
+// Create a new Diff model
+//
+// Diffview can be used to display the output of flux diff.
+// It works by executing diff using the given entry delivered
+// via tea.Msg, then parsing it through a state machine
+// (see parser.go) into a structured output which is then
+// displayed in its own viewport with filters to collapse
+// or show specific diff components.
 func New(w, h int, showFilter bool) *Model {
 	m := Model{
 		border:     false,
@@ -63,10 +71,15 @@ func New(w, h int, showFilter bool) *Model {
 	return &m
 }
 
+// Init should be called whenever the diff view is being
+// created. This will initialise any components required
+// by the model
 func (m *Model) Init() tea.Cmd {
 	return m.splash.Init()
 }
 
+// NextFocus switches to the next component in this view
+// when tab key switching is required
 func (m *Model) NextFocus() components.FocusType {
 	switch m.focus {
 	case NoFocus:
@@ -89,6 +102,8 @@ func (m *Model) NextFocus() components.FocusType {
 	return m.focus
 }
 
+// PreviousFocus returns the focus to the previous entry
+// in the view when tab key switching is required
 func (m *Model) PreviousFocus() components.FocusType {
 	switch m.focus {
 	case NoFocus:
@@ -111,6 +126,7 @@ func (m *Model) PreviousFocus() components.FocusType {
 	return m.focus
 }
 
+// SetSize sets the viuew size of this model
 func (m *Model) SetSize(w, h int) tea.Model {
 	m.width = w
 	m.height = h
@@ -202,6 +218,7 @@ func (m *Model) View() string {
 	if m.border {
 		m.style = m.style.Border(lipgloss.RoundedBorder(), true)
 	}
+
 	switch m.focus {
 	case ViewportFocus:
 		view = m.style.Render(view)
